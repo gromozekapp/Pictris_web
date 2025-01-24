@@ -40,94 +40,252 @@
         .section {
             margin-bottom: 40px;
         }
+        .menu {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+        }
+        .menu nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+        .menu nav ul li {
+            padding: 15px 25px;
+        }
+        .menu nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        .menu nav ul li a:hover {
+            color: #ddd;
+        }
+        .content-section {
+            padding: 80px 20px 20px;
+            min-height: 100vh;
+        }
+        #privacy {
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+        }
     </style>
 </head>
 <body>
     <canvas id="canvas"></canvas>
     
-    <div class="content">
-        <h1>Pictris - remember your moments</h1>
-        
-        <div class="section">
-            <img src="images/arm_pictris3.png" 
-             alt="icon pictris"
-             width="500" 
-             height="500"
-             style="display: block; margin: 0 auto;"
-             title="icon pictris">
-             <h2>Pictris app</h2>
-            <p>Turn your favourite photos into a unique playing field! Classic Tetris meets your memories in a new, exciting format. Play, remember, win!</p>
-            <p>
-            <img src="images/Logo - SIWA - Left-aligned - Black - Large@1x.png" 
-             alt="icon apple"
-             width="30" 
-             height="30"
-             title="icon apple"> Develop for Apple</p>
-             <p> - <Link>for testing</Link> <a href="https://testflight.apple.com/join/xnStS2rP" style="color: rgb(8, 41, 120);">https://testflight.apple.com/join/xnStS2rP</a></p>
-        </div>
+    <div class="menu">
+        <nav>
+            <ul>
+                <li><a href="#start">Home</a></li>
+                <li><a href="#privacy">Privacy Policy</a></li>
+            </ul>
+        </nav>
+    </div>
 
-        <div class="section">
-            <h2>WELCOME TO PICTRIS!</h2>
-            <p> Discover a new dimension of classic Tetris, where each game becomes special thanks to your own photos!</p>
-            <p> PicTris is a unique combination of everyone's favourite Tetris mechanics with the ability to use personal photos as a playing field background.</p>
-            <p> 1. GAME FEATURES:</p>
-            <p> - Personalisation</p>
-            <p> - Choose any photo from your gallery as a background for the game</p> 
-            <p> - Create a unique atmosphere of each game session</p>
-            <p> - Play against the background of your favourite memories</p>
-            <p> 2. CLASSIC GAMEPLAY</p>
-            <p> - Familiar Tetris mechanics that millions know and love</p>
-            <p> - Intuitive control: swipes for movement, taps for rotation</p>
-            <p> - Increasing complexity for a real challenge</p>
-            <p> 3. SYSTEM OF ACHIEVEMENTS</p>
-            <p> - with yourself by setting new records</p>
-            <p> - your progress</p>
-            <p> - Improve your skills with each game</p>
-            <p> 4. DYNAMICS</p>
-            <p> - Smooth animation</p>
-            <p> - Responsive management</p>
-            <p> - Sound effects for full immersion</p>
-            <p> 5. MODERN DESIGN</p>
-            <p> - Minimalist interface</p>
-            <p> - Clear graphics</p>
-            <p> - Pleasant visual effects</p>
-            <p> 6. HOW TO PLAY:</p>
-            <p> - Select a photo from the gallery</p>
-            <p> - Start the game with one tap</p>
-            <p> - Control the falling blocks</p>
-            <p> - Collect full lines</p>
-            <p> - Strive for new records!</p>
-            <p> 7. WHY PICTRIS?</p>
-            <p> - A unique combination of classic gameplay with a personal approach</p>
-            <p> - Ability to refresh memories during the game</p>
-            <p> -  Si mple and intuitive interface</p>
-            <p> -  No ads and built-in purchases</p>
-            <p> -  Regular updates</p>
-            <p> 8. TECHNICAL FEATURES:</p>
-            <p> - Optimised for all iPhone models</p>
-            <p> - Support for iOS 16.0 and higher</p>
-            <p> - Minimum system requirements</p>
-            <p> - Compact application size</p>
-            <p> 9. IDEAL FOR:</p>
-            <p> -  Fans of classic games</p>
-            <p> -  Connoisseurs of a unique gaming experience</p>
-            <p> -  Those who like to personalise their games</p>
-            <p> -  Players of all ages and skill levels</p>
-            <p> 10. AVAILABILITY:</p>
-            <p> -  Free download</p>
-            <p> -  No hidden fees</p>
-            <p> -  Full functionality immediately after installation</p>
-            <p> -  Join the growing community of PicTris players and create your own unique game story!</p>
-            <p> -  Download now and turn your favourite photos into exciting game sessions.</p>
-            <p> 11. REGULAR UPDATES</p>
-            <p> -  We are constantly working on improving the game and adding new features. Stay tuned!</p>
-            <p> 12. SUPPORT</p>
-            <p> -  Do you have any questions or suggestions? We are always happy to help!</p>
-            <p> -  Contact us via <a href="mailto:gromozeka@abv.bg" style="color: white;">gromozeka@abv.bg</a></p>
-            </p>
-        </div>
+    <div id="home" class="content-section">
+        <div class="content">
+            <h1>Pictris - remember your moments</h1>
+            
+            <div class="section">
+                <img src="images/arm_pictris3.png" 
+                 alt="icon pictris"
+                 width="500" 
+                 height="500"
+                 style="display: block; margin: 0 auto;"
+                 title="icon pictris">
+                 <h2>Pictris app</h2>
+                <p>Turn your favourite photos into a unique playing field! Classic Tetris meets your memories in a new, exciting format. Play, remember, win!</p>
+                <p>
+                <img src="images/Logo - SIWA - Left-aligned - Black - Large@1x.png" 
+                 alt="icon apple"
+                 width="30" 
+                 height="30"
+                 title="icon apple"> Develop for Apple</p>
+                 <p> - <Link>for testing</Link> <a href="https://testflight.apple.com/join/xnStS2rP" style="color: rgb(8, 41, 120);">https://testflight.apple.com/join/xnStS2rP</a></p>
+            </div>
 
-        <!-- Добавьте сюда свой контент -->
+            <div class="section" id="start">
+                <h2>WELCOME TO PICTRIS!</h2>
+                <p> Discover a new dimension of classic Tetris, where each game becomes special thanks to your own photos!</p>
+                <p> PicTris is a unique combination of everyone's favourite Tetris mechanics with the ability to use personal photos as a playing field background.</p>
+                <p> 1. GAME FEATURES:</p>
+                <p> - Personalisation</p>
+                <p> - Choose any photo from your gallery as a background for the game</p> 
+                <p> - Create a unique atmosphere of each game session</p>
+                <p> - Play against the background of your favourite memories</p>
+                <p> 2. CLASSIC GAMEPLAY</p>
+                <p> - Familiar Tetris mechanics that millions know and love</p>
+                <p> - Intuitive control: swipes for movement, taps for rotation</p>
+                <p> - Increasing complexity for a real challenge</p>
+                <p> 3. SYSTEM OF ACHIEVEMENTS</p>
+                <p> - with yourself by setting new records</p>
+                <p> - your progress</p>
+                <p> - Improve your skills with each game</p>
+                <p> 4. DYNAMICS</p>
+                <p> - Smooth animation</p>
+                <p> - Responsive management</p>
+                <p> - Sound effects for full immersion</p>
+                <p> 5. MODERN DESIGN</p>
+                <p> - Minimalist interface</p>
+                <p> - Clear graphics</p>
+                <p> - Pleasant visual effects</p>
+                <p> 6. HOW TO PLAY:</p>
+                <p> - Select a photo from the gallery</p>
+                <p> - Start the game with one tap</p>
+                <p> - Control the falling blocks</p>
+                <p> - Collect full lines</p>
+                <p> - Strive for new records!</p>
+                <p> 7. WHY PICTRIS?</p>
+                <p> - A unique combination of classic gameplay with a personal approach</p>
+                <p> - Ability to refresh memories during the game</p>
+                <p> -  Si mple and intuitive interface</p>
+                <p> -  No ads and built-in purchases</p>
+                <p> -  Regular updates</p>
+                <p> 8. TECHNICAL FEATURES:</p>
+                <p> - Optimised for all iPhone models</p>
+                <p> - Support for iOS 16.0 and higher</p>
+                <p> - Minimum system requirements</p>
+                <p> - Compact application size</p>
+                <p> 9. IDEAL FOR:</p>
+                <p> -  Fans of classic games</p>
+                <p> -  Connoisseurs of a unique gaming experience</p>
+                <p> -  Those who like to personalise their games</p>
+                <p> -  Players of all ages and skill levels</p>
+                <p> 10. AVAILABILITY:</p>
+                <p> -  Free download</p>
+                <p> -  No hidden fees</p>
+                <p> -  Full functionality immediately after installation</p>
+                <p> -  Join the growing community of PicTris players and create your own unique game story!</p>
+                <p> -  Download now and turn your favourite photos into exciting game sessions.</p>
+                <p> 11. REGULAR UPDATES</p>
+                <p> -  We are constantly working on improving the game and adding new features. Stay tuned!</p>
+                <p> 12. SUPPORT</p>
+                <p> -  Do you have any questions or suggestions? We are always happy to help!</p>
+                <p> -  Contact us via <a href="mailto:gromozeka@abv.bg" style="color: white;">gromozeka@abv.bg</a></p>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="privacy" class="content-section">
+        <div class="content">
+            <div class="section">
+                <img src="images/Cat with planshet.jpg" 
+                     alt="cat with laptop"
+                     width="500" 
+                     height="500"
+                     style="display: block; margin: 0 auto;"
+                     title="cat with laptop">
+            </div>
+            
+            <h1>Privacy Policy for PicTris</h1>
+            
+            <div class="section">
+                <h2>Introduction</h2>
+                <p>Welcome to PicTris. We respect your privacy and are committed to protecting your personal data. This privacy policy explains how we handle your data when you use our application.</p>
+            </div>
+
+            <div class="section">
+                <h2>Summary</h2>
+                <p>PicTris is designed with privacy at its core:</p>
+                <p>- Works completely offline</p>
+                <p>- No data collection</p>
+                <p>- No cloud services</p>
+                <p>- No user accounts</p>
+                <p>- No analytics</p>
+                <p>- No advertisements</p>
+            </div>
+
+            <div class="section">
+                <h2>Data Collection and Usage</h2>
+                <h3>What We Don't Collect</h3>
+                <p>- Personal information</p>
+                <p>- Usage statistics</p>
+                <p>- Location data</p>
+                <p>- Device information</p>
+                <p>- Photos or media files</p>
+                <p>- Network information</p>
+
+                <h3>Photo Access</h3>
+                <p>- PicTris requires access to your photo library to function</p>
+                <p>- All photo processing happens locally on your device</p>
+                <p>- No photos are uploaded, stored, or transmitted</p>
+                <p>- Photo access is used solely for gameplay and meme creation</p>
+                <p>- You can revoke photo access at any time through your device settings</p>
+            </div>
+
+            <div class="section">
+                <h2>Data Storage</h2>
+                <h3>Local Storage</h3>
+                <p>- All app data is stored locally on your device</p>
+                <p>- Game progress and settings are saved only on your device</p>
+                <p>- Created memes are saved to your local photo library</p>
+                <p>- No cloud backup or sync features</p>
+
+                <h3>Data Deletion</h3>
+                <p>- Uninstalling the app removes all app-related data</p>
+                <p>- Created memes remain in your photo library until you delete them</p>
+                <p>- You can delete photos through the app's interface during gameplay</p>
+            </div>
+
+            <div class="section">
+                <h2>Technical Implementation</h2>
+                <h3>Offline Functionality</h3>
+                <p>- The app functions entirely offline</p>
+                <p>- No internet connection is required</p>
+                <p>- No background processes</p>
+                <p>- No remote servers interaction</p>
+
+                <h3>Security</h3>
+                <p>- No data transmission</p>
+                <p>- No encryption needed as data stays local</p>
+                <p>- Standard iOS security measures apply</p>
+            </div>
+
+            <div class="section">
+                <h2>Third-Party Services</h2>
+                <p>PicTris does not:</p>
+                <p>- Use third-party analytics</p>
+                <p>- Integrate social media services</p>
+                <p>- Include advertising networks</p>
+                <p>- Use tracking technologies</p>
+                <p>- Share data with third parties</p>
+            </div>
+
+            <div class="section">
+                <h2>Children's Privacy</h2>
+                <p>- PicTris is suitable for all ages</p>
+                <p>- We do not collect any personal information</p>
+                <p>- Parents can control photo library access through device settings</p>
+            </div>
+
+            <div class="section">
+                <h2>Contact Information</h2>
+                <p>For privacy-related questions:</p>
+                <p>- Email: <a href="mailto:gromozeka@abv.bg" style="color: white;">gromozeka@abv.bg</a></p>
+                <p>- Developer: Peresvet</p>
+            </div>
+
+            <div class="section">
+                <h2>Compliance</h2>
+                <p>PicTris complies with:</p>
+                <p>- App Store Guidelines</p>
+                <p>- GDPR requirements</p>
+                <p>- CCPA requirements</p>
+                <p>- COPPA guidelines</p>
+            </div>
+
+            <div class="section">
+                <h2>Conclusion</h2>
+                <p>PicTris is designed to provide a private, secure experience where your data stays on your device. We believe in transparent privacy practices and minimal data collection.</p>
+                <p>By using PicTris, you agree to this privacy policy. If you disagree with any part of this policy, please do not use the application.</p>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -233,6 +391,16 @@
         }
 
         animate();
+
+        // Плавная прокрутка для меню
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
     </script>
 </body>
 </html>
