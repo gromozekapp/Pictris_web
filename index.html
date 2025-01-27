@@ -1,21 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-    <title>Pictris - remember your moments</title>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Pictris</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="theme.js" defer></script>
     <style>
+        /* Светлая тема */
+        :root[data-theme="light"] {
+            --bg-color: #ffffff;
+            --text-color: #333333;
+            --content-bg: rgba(255, 255, 255, 0.9);
+            --menu-bg: rgba(255, 255, 255, 0.9);
+            --link-color: #08296c;
+            --heading-color: #333333;
+            --privacy-bg: rgba(255, 255, 255, 0.9);
+            --privacy-text: #333333;
+            --background-color: #ffffff;
+        }
+
+        /* Темная тема */
+        :root[data-theme="dark"] {
+            --bg-color: #000000;
+            --text-color: #ffffff;
+            --content-bg: rgba(0, 0, 0, 0.7);
+            --menu-bg: rgba(0, 0, 0, 0.7);
+            --link-color: #ffffff;
+            --heading-color: #ffffff;
+            --privacy-bg: rgba(0, 0, 0, 0.7);
+            --privacy-text: #ffffff;
+            --background-color: #000000;
+        }
+
         body {
             margin: 0;
             overflow-x: hidden;
-            background: #000;
+            background-color: var(--bg-color);
             font-family: Arial, sans-serif;
-            color: white;
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
         canvas {
             position: fixed;
             top: 0;
             left: 0;
             z-index: -1;
+            background-color: var(--bg-color);
         }
         .content {
             position: relative;
@@ -23,19 +54,21 @@
             max-width: 800px;
             margin: 40px auto;
             padding: 20px;
-            background: rgba(0, 0, 0, 0.7);
+            background: var(--content-bg);
             border-radius: 10px;
             overflow-wrap: break-word;
             word-wrap: break-word;
+            color: var(--text-color);
         }
-        h1 {
-            color: #fff;
-            text-align: center;
-            margin-bottom: 30px;
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--heading-color);
         }
         p {
             line-height: 1.6;
             margin-bottom: 20px;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            transition: background-color 0.3s ease;
         }
         .section {
             margin-bottom: 40px;
@@ -44,7 +77,7 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            background: var(--menu-bg);
             z-index: 1000;
         }
         .menu nav ul {
@@ -58,20 +91,120 @@
             padding: 15px 25px;
         }
         .menu nav ul li a {
-            color: white;
+            color: var(--text-color);
             text-decoration: none;
             font-size: 18px;
+            transition: color 0.3s ease;
         }
         .menu nav ul li a:hover {
-            color: #ddd;
+            color: var(--link-color);
         }
         .content-section {
             padding: 80px 20px 20px;
             min-height: 100vh;
         }
         #privacy {
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
+            background: var(--privacy-bg);
+            color: var(--privacy-text);
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --background-color: #1a1a1a;
+                --text-color: #ffffff;
+            }
+        }
+        @media (prefers-color-scheme: light) {
+            :root {
+                --background-color: #ffffff;
+                --text-color: #333333;
+            }
+        }
+        a {
+            color: var(--link-color);
+            transition: color 0.3s ease;
+        }
+        /* Добавляем плавные переходы для всех элементов */
+        *, *::before, *::after {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        /* Стили для бейджей App Store */
+        .app-store-badge {
+            transition: opacity 0.3s ease;
+        }
+
+        /* В светлой теме показываем черный бейдж */
+        :root[data-theme="light"] .light-badge {
+            display: inline-block;
+        }
+        :root[data-theme="light"] .dark-badge {
+            display: none;
+        }
+
+        /* В темной теме показываем белый бейдж */
+        :root[data-theme="dark"] .light-badge {
+            display: none;
+        }
+        :root[data-theme="dark"] .dark-badge {
+            display: inline-block;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--heading-color);
+        }
+
+        /* Стили для логотипа Sign in with Apple */
+        .apple-sign-in-logo {
+            transition: opacity 0.3s ease;
+        }
+
+        /* В светлой теме показываем черный логотип */
+        :root[data-theme="light"] .apple-sign-in-logo {
+            filter: none;
+        }
+
+        /* В темной теме инвертируем цвет логотипа */
+        :root[data-theme="dark"] .apple-sign-in-logo {
+            filter: invert(1);
+        }
+
+        /* Стили для секции About */
+        .summary-section, .experience-section {
+            margin: 30px 0;
+        }
+
+        .date {
+            color: var(--text-color);
+            font-style: italic;
+        }
+
+        .position {
+            font-weight: bold;
+            color: var(--heading-color);
+        }
+
+        .tech-stack {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tech-stack li {
+            background: var(--content-bg);
+            padding: 5px 15px;
+            border-radius: 15px;
+            color: var(--text-color);
+        }
+
+        .developer-cat {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .developer-cat:hover {
+            transform: scale(1.02);
         }
     </style>
 </head>
@@ -82,6 +215,7 @@
         <nav>
             <ul>
                 <li><a href="#start">Home</a></li>
+                <li><a href="#about">About</a></li>
                 <li><a href="#privacy">Privacy Policy</a></li>
             </ul>
         </nav>
@@ -94,19 +228,30 @@
             <div class="section">
                 <img src="images/arm_pictris3.png" 
                  alt="icon pictris"
-                 width="500" 
-                 height="500"
+                 width="300" 
+                 height="300"
                  style="display: block; margin: 0 auto;"
                  title="icon pictris">
                  <h2>Pictris app</h2>
-                <p>Turn your favourite photos into a unique playing field! Classic Tetris meets your memories in a new, exciting format. Play, remember, win!</p>
+               
                 <p>
-                <img src="images/Logo - SIWA - Left-aligned - Black - Large@1x.png" 
-                 alt="icon apple"
-                 width="30" 
-                 height="30"
-                 title="icon apple"> Develop for Apple</p>
-                 <p> - <Link>for testing</Link> <a href="https://testflight.apple.com/join/xnStS2rP" style="color: rgb(8, 41, 120);">https://testflight.apple.com/join/xnStS2rP</a></p>
+                    <a href="https://apps.apple.com/bg/app/pictris/id6739788238" target="_blank" rel="noopener noreferrer">
+                        <img src="images/US/Download_on_App_Store/Black_lockup/SVG/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg" 
+                             alt="Download on App Store"
+                             width="120" 
+                             height="40"
+                             title="Download on App Store"
+                             class="app-store-badge light-badge">
+                        <img src="images/US/Download_on_App_Store/White_lockup/SVG/Download_on_the_App_Store_Badge_US-UK_RGB_wht_092917.svg" 
+                             alt="Download on App Store"
+                             width="120" 
+                             height="40"
+                             title="Download on App Store"
+                             class="app-store-badge dark-badge">
+                    </a>
+                
+                </p>
+                <p>Turn your favourite photos into a unique playing field! Classic Tetris meets your memories in a new, exciting format. Play, remember, win!</p>
             </div>
 
             <div class="section" id="start">
@@ -166,7 +311,7 @@
                 <p> -  We are constantly working on improving the game and adding new features. Stay tuned!</p>
                 <p> 12. SUPPORT</p>
                 <p> -  Do you have any questions or suggestions? We are always happy to help!</p>
-                <p> -  Contact us via <a href="mailto:gromozeka@abv.bg" style="color: white;">gromozeka@abv.bg</a></p>
+                <p> -  Contact us via <a href="mailto:gromozeka@abv.bg" style="color: #18519f;">gromozeka@abv.bg</a></p>
                 </p>
             </div>
         </div>
@@ -177,8 +322,8 @@
             <div class="section">
                 <img src="images/Cat with planshet.jpg" 
                      alt="cat with laptop"
-                     width="500" 
-                     height="500"
+                     width="300" 
+                     height="300"
                      style="display: block; margin: 0 auto;"
                      title="cat with laptop">
             </div>
@@ -288,6 +433,49 @@
         </div>
     </div>
 
+    <div id="about" class="content-section">
+        <div class="content">
+            <img src="images/Cat with the laptop.jpg" 
+                 alt="Developer Cat"
+                 width="300" 
+                 height="300"
+                 style="display: block; 
+                        margin: 20px auto; 
+                        border-radius: 10px;"
+                 class="developer-cat">
+            
+            <h1>About Developer</h1>
+            
+            <div class="section">
+                <h2>DANIIL ZOLOTAREV</h2>
+                <h3>IOS DEVELOPER</h3>
+                
+                <div class="summary-section">
+                    <h3>SUMMARY</h3>
+                    <p>iOS developer with 5+ years experience in developing and supporting applications for
+                    Apple platforms (iOS, iPadOS, watchOS). Excellent knowledge of Swift, UIKit
+                    framework, Storyboards, SwiftUI, Apple Human Interface Guidelines.</p>
+                    <p>Confident experience with data storage (Realm, Core Data, GRDB).</p>
+                </div>
+
+                <div class="experience-section">
+                    <h4>Application stack:</h4>
+                    <ul class="tech-stack">
+                        <li>MVC (Planning to transition to MVVM)</li>
+                        <li>UIKit</li>
+                        <li>SwiftUI</li>
+                        <li>CoreData</li>
+                        <li>Alamofire</li>
+                        <li>WebSockets</li>
+                        <li>Firebase</li>
+                        <li>AVFoundation</li>
+                        <li>CoreAnimation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
@@ -377,7 +565,9 @@
         }
 
         function animate() {
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+            // Заменим непрозрачный черный фон на цвет из CSS переменной с прозрачностью
+            const backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--bg-color');
+            ctx.fillStyle = backgroundColor.trim();
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             
             if (Math.random() < 0.03) {
@@ -401,6 +591,21 @@
                 });
             });
         });
+
+        const root = document.documentElement;
+
+        // Функция для установки темы
+        function setTheme(isDark) {
+            root.setAttribute('data-theme', isDark ? 'dark' : 'light');
+        }
+
+        // Слушатель для системных настроек темы
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            setTheme(e.matches);
+        });
+
+        // Установка начальной темы
+        setTheme(window.matchMedia('(prefers-color-scheme: dark)').matches);
     </script>
 </body>
 </html>
