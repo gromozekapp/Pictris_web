@@ -1,597 +1,265 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PicTris — Tetris meets your gallery</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="theme.js" defer></script>
-    <style>
-        /* Светлая тема */
-        :root[data-theme="light"] {
-            --bg-color: #ffffff;
-            --text-color: #333333;
-            --content-bg: rgba(255, 255, 255, 0.9);
-            --menu-bg: rgba(255, 255, 255, 0.9);
-            --link-color: #08296c;
-            --heading-color: #333333;
-            --privacy-bg: rgba(255, 255, 255, 0.9);
-            --privacy-text: #333333;
-            --background-color: #ffffff;
-        }
-
-        /* Темная тема */
-        :root[data-theme="dark"] {
-            --bg-color: #000000;
-            --text-color: #ffffff;
-            --content-bg: rgba(0, 0, 0, 0.7);
-            --menu-bg: rgba(0, 0, 0, 0.7);
-            --link-color: #ffffff;
-            --heading-color: #ffffff;
-            --privacy-bg: rgba(0, 0, 0, 0.7);
-            --privacy-text: #ffffff;
-            --background-color: #000000;
-        }
-
-        body {
-            margin: 0;
-            overflow-x: hidden;
-            background-color: var(--bg-color);
-            font-family: Arial, sans-serif;
-            color: var(--text-color);
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-        canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: -1;
-            background-color: var(--bg-color);
-        }
-        .content {
-            position: relative;
-            z-index: 1;
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-            background: var(--content-bg);
-            border-radius: 10px;
-            overflow-wrap: break-word;
-            word-wrap: break-word;
-            color: var(--text-color);
-        }
-        h1, h2, h3, h4, h5, h6 {
-            color: var(--heading-color);
-        }
-        p {
-            line-height: 1.6;
-            margin-bottom: 20px;
-            color: var(--text-color);
-            background-color: var(--background-color);
-            transition: background-color 0.3s ease;
-        }
-        .section {
-            margin-bottom: 40px;
-        }
-        .menu {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: var(--menu-bg);
-            z-index: 1000;
-        }
-        .menu nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-        }
-        .menu nav ul li {
-            padding: 15px 25px;
-        }
-        .menu nav ul li a {
-            color: var(--text-color);
-            text-decoration: none;
-            font-size: 18px;
-            transition: color 0.3s ease;
-        }
-        .menu nav ul li a:hover {
-            color: var(--link-color);
-        }
-        .content-section {
-            padding: 80px 20px 20px;
-            min-height: 100vh;
-        }
-        #privacy {
-            background: var(--privacy-bg);
-            color: var(--privacy-text);
-        }
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --background-color: #1a1a1a;
-                --text-color: #ffffff;
-            }
-        }
-        @media (prefers-color-scheme: light) {
-            :root {
-                --background-color: #ffffff;
-                --text-color: #333333;
-            }
-        }
-        a {
-            color: var(--link-color);
-            transition: color 0.3s ease;
-        }
-        /* Добавляем плавные переходы для всех элементов */
-        *, *::before, *::after {
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-        /* Стили для бейджей App Store */
-        .app-store-badge {
-            transition: opacity 0.3s ease;
-        }
-
-        /* В светлой теме показываем черный бейдж */
-        :root[data-theme="light"] .light-badge {
-            display: inline-block;
-        }
-        :root[data-theme="light"] .dark-badge {
-            display: none;
-        }
-
-        /* В темной теме показываем белый бейдж */
-        :root[data-theme="dark"] .light-badge {
-            display: none;
-        }
-        :root[data-theme="dark"] .dark-badge {
-            display: inline-block;
-        }
-
-        h1 {
-            text-align: center;
-            color: var(--heading-color);
-        }
-
-        /* Стили для логотипа Sign in with Apple */
-        .apple-sign-in-logo {
-            transition: opacity 0.3s ease;
-        }
-
-        /* В светлой теме показываем черный логотип */
-        :root[data-theme="light"] .apple-sign-in-logo {
-            filter: none;
-        }
-
-        /* В темной теме инвертируем цвет логотипа */
-        :root[data-theme="dark"] .apple-sign-in-logo {
-            filter: invert(1);
-        }
-
-        /* Стили для секции About */
-        .summary-section, .experience-section {
-            margin: 30px 0;
-        }
-
-        .date {
-            color: var(--text-color);
-            font-style: italic;
-        }
-
-        .position {
-            font-weight: bold;
-            color: var(--heading-color);
-        }
-
-        .tech-stack {
-            list-style-type: none;
-            padding: 0;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .tech-stack li {
-            background: var(--content-bg);
-            padding: 5px 15px;
-            border-radius: 15px;
-            color: var(--text-color);
-        }
-
-        .developer-cat {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
-        }
-        
-        .developer-cat:hover {
-            transform: scale(1.02);
-        }
-    </style>
+    <meta name="description" content="PicTris — play Tetris over your photos and videos. Blogger Mode records gameplay with front camera. Free, offline, no ads.">
+    <meta property="og:title" content="PicTris — Tetris meets your gallery">
+    <meta property="og:description" content="Play Tetris over your photos and videos. Record face-cam gameplay with Blogger Mode. Free, offline, privacy-first.">
+    <meta property="og:image" content="https://gromozekapp.github.io/Pictris_web/images/screenshots/1.png">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://gromozekapp.github.io/Pictris_web/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="PicTris — Tetris meets your gallery">
+    <meta name="twitter:description" content="Play Tetris over your photos and videos. Free, offline, no ads.">
+    <meta name="twitter:image" content="https://gromozekapp.github.io/Pictris_web/images/screenshots/1.png">
+    <link rel="canonical" href="https://gromozekapp.github.io/Pictris_web/">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/theme.js" defer></script>
+    <script src="js/main.js" defer></script>
 </head>
 <body>
-    <canvas id="canvas"></canvas>
-    
-    <div class="menu">
-        <nav>
-            <ul>
-                <li><a href="#start">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#privacy">Privacy Policy</a></li>
-            </ul>
-        </nav>
-    </div>
-
-    <div id="home" class="content-section">
-        <div class="content">
-            <h1>Pictris - remember your moments</h1>
-            
-            <div class="section">
-                <img src="images/arm_pictris3.png" 
-                 alt="icon pictris"
-                 width="300" 
-                 height="300"
-                 style="display: block; margin: 0 auto;"
-                 title="icon pictris">
-                 <h2>Pictris app</h2>
-               
-                <p>
-                    <a href="https://apps.apple.com/bg/app/pictris/id6739788238" target="_blank" rel="noopener noreferrer">
-                        <img src="images/US/Download_on_App_Store/Black_lockup/SVG/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg" 
-                             alt="Download on App Store"
-                             width="120" 
-                             height="40"
-                             title="Download on App Store"
-                             class="app-store-badge light-badge">
-                        <img src="images/US/Download_on_App_Store/White_lockup/SVG/Download_on_the_App_Store_Badge_US-UK_RGB_wht_092917.svg" 
-                             alt="Download on App Store"
-                             width="120" 
-                             height="40"
-                             title="Download on App Store"
-                             class="app-store-badge dark-badge">
-                    </a>
-                
-                </p>
-                <p>Classic Tetris meets your photo library — and now your front camera. Play over photos and videos, or record face-cam gameplay with Blogger Mode. Offline, no ads, privacy-first.</p>
-            </div>
-
-            <div class="section" id="start">
-                <h2>Welcome to PicTris</h2>
-                <p>PicTris turns forgotten photos and videos into the backdrop of a block puzzle. Swipe through your own media like a personal feed, rediscover memories while you play, and — in Blogger Mode — create share-ready gameplay videos with your face on camera.</p>
-
-                <h3>Three play modes</h3>
-                <p><strong>Photo Gallery</strong> — your photos as the game background. Swipe down to switch images and speed up the falling block.</p>
-                <p><strong>Video Gallery</strong> — portrait videos from your library play behind the board, with sound. Long press pauses game and video together.</p>
-                <p><strong>Blogger Mode</strong> <em>(new in 1.5)</em> — front camera as a live background. Screen capture records gameplay; the microphone captures your voice and in-game audio. Optional teleprompter with auto scroll or manual swipe. After game over, preview, save to Photos, or share.</p>
-
-                <h3>Gameplay</h3>
-                <p>Swipe left/right to move, up to rotate, down to hard-drop and switch media. Filter your gallery by day, week, month, or year. Delete unwanted items, create memes, track high scores and achievements.</p>
-
-                <h3>PicTris Pro (optional)</h3>
-                <p>The core game is free. Blogger Mode includes one free recording per day. <strong>PicTris Pro</strong> unlocks unlimited recordings, removes the watermark, and includes full teleprompter access — monthly or lifetime via Apple In-App Purchase.</p>
-
-                <h3>Privacy</h3>
-                <p>No ads, no tracking, no accounts. Photos, videos, and recordings stay on your device. Camera and microphone are used only in Blogger Mode, when you choose that mode.</p>
-
-                <h3>Requirements</h3>
-                <p>iOS 16.6+, iPhone and iPad. Photo library access required; camera and microphone only for Blogger Mode.</p>
-
-                <h3>Support</h3>
-                <p>Questions or suggestions? Contact us at <a href="mailto:gromozeka@abv.bg">gromozeka@abv.bg</a></p>
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="#home" class="logo" aria-label="PicTris home">
+                <img src="images/hero/app-icon.png" alt="" width="36" height="36">
+                PicTris
+            </a>
+            <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+            <nav aria-label="Main navigation">
+                <ul class="nav-links">
+                    <li><a href="#modes">Modes</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#pro">Pro</a></li>
+                    <li><a href="privacy.html">Privacy</a></li>
+                </ul>
+            </nav>
+            <div class="header-cta">
+                <a href="https://apps.apple.com/bg/app/pictris/id6739788238" class="app-store-link" target="_blank" rel="noopener noreferrer">
+                    <img src="images/US/Download_on_App_Store/Black_lockup/SVG/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg"
+                         alt="Download on the App Store"
+                         class="app-store-badge light-badge"
+                         height="36">
+                    <img src="images/US/Download_on_App_Store/White_lockup/SVG/Download_on_the_App_Store_Badge_US-UK_RGB_wht_092917.svg"
+                         alt="Download on the App Store"
+                         class="app-store-badge dark-badge"
+                         height="36">
+                </a>
             </div>
         </div>
-    </div>
+    </header>
 
-    <div id="privacy" class="content-section">
-        <div class="content">
-            <div class="section">
-                <img src="images/Cat with planshet.jpg" 
-                     alt="cat with laptop"
-                     width="300" 
-                     height="300"
-                     style="display: block; margin: 0 auto;"
-                     title="cat with laptop">
-            </div>
-            
-            <h1>Privacy Policy for PicTris</h1>
-            <p class="date">Last Updated: July 5, 2026</p>
-            
-            <div class="section">
-                <h2>Introduction</h2>
-                <p>Welcome to PicTris. We respect your privacy and are committed to protecting your personal data. This privacy policy explains how we handle your data when you use our application.</p>
-            </div>
-
-            <div class="section">
-                <h2>Summary</h2>
-                <p>PicTris is designed with privacy at its core:</p>
-                <p>- Core gameplay works completely offline</p>
-                <p>- No data collection</p>
-                <p>- No cloud services</p>
-                <p>- No user accounts</p>
-                <p>- No analytics</p>
-                <p>- No advertisements</p>
-            </div>
-
-            <div class="section">
-                <h2>Data Collection and Usage</h2>
-                <h3>What We Don't Collect</h3>
-                <p>- Personal information</p>
-                <p>- Usage statistics</p>
-                <p>- Location data</p>
-                <p>- Device information</p>
-                <p>- Photos or media files</p>
-                <p>- Network information (except when you purchase PicTris Pro)</p>
-
-                <h3>Photo Access</h3>
-                <p>- PicTris requires access to your photo library to function</p>
-                <p>- All photo processing happens locally on your device</p>
-                <p>- No photos are uploaded, stored, or transmitted</p>
-                <p>- Photo access is used solely for gameplay and meme creation</p>
-                <p>- You can revoke photo access at any time through your device settings</p>
-
-                <h3>Camera and Microphone (Blogger Mode)</h3>
-                <p>- Blogger Mode uses the front camera as a live game background</p>
-                <p>- The microphone records voice commentary during gameplay recordings</p>
-                <p>- Camera and microphone access are optional and only used in Blogger Mode</p>
-                <p>- Recordings are processed and stored locally on your device</p>
-                <p>- You can grant or revoke camera and microphone access in iOS Settings</p>
-
-                <h3>Saving Recordings</h3>
-                <p>- Blogger Mode can save gameplay recordings to your Photos library</p>
-                <p>- Saving requires add-only photo library permission</p>
-                <p>- Recordings are not uploaded or shared unless you choose to share them</p>
-
-                <h3>In-App Purchases (PicTris Pro)</h3>
-                <p>- PicTris Pro (monthly subscription or lifetime purchase) is optional</p>
-                <p>- Purchases are processed entirely by Apple through StoreKit</p>
-                <p>- We do not collect or store payment information</p>
-                <p>- An internet connection is required only to complete or restore a purchase</p>
-                <p>- The core game (Photo Gallery and Video Gallery) remains free and works offline</p>
-            </div>
-
-            <div class="section">
-                <h2>Data Storage</h2>
-                <h3>Local Storage</h3>
-                <p>- All app data is stored locally on your device</p>
-                <p>- Game progress and settings are saved only on your device</p>
-                <p>- Created memes and Blogger Mode recordings are saved to your local photo library</p>
-                <p>- No cloud backup or sync features</p>
-
-                <h3>Data Deletion</h3>
-                <p>- Uninstalling the app removes all app-related data</p>
-                <p>- Created memes and saved recordings remain in your photo library until you delete them</p>
-                <p>- You can delete photos through the app's interface during gameplay</p>
-            </div>
-
-            <div class="section">
-                <h2>Technical Implementation</h2>
-                <h3>Offline Functionality</h3>
-                <p>- Photo Gallery and Video Gallery work entirely offline</p>
-                <p>- Blogger Mode recording and playback work offline</p>
-                <p>- No background data collection</p>
-                <p>- No remote servers for gameplay or media</p>
-
-                <h3>Security</h3>
-                <p>- No transmission of your photos, videos, or recordings</p>
-                <p>- Standard iOS security measures apply</p>
-                <p>- Purchase transactions are handled by Apple's secure payment system</p>
-            </div>
-
-            <div class="section">
-                <h2>Third-Party Services</h2>
-                <p>PicTris does not:</p>
-                <p>- Use third-party analytics</p>
-                <p>- Integrate social media services</p>
-                <p>- Include advertising networks</p>
-                <p>- Use tracking technologies</p>
-                <p>- Share data with third parties</p>
-                <p>PicTris Pro uses Apple In-App Purchase (StoreKit) only. Apple's privacy policy applies to payment processing.</p>
-            </div>
-
-            <div class="section">
-                <h2>Children's Privacy</h2>
-                <p>- PicTris is suitable for all ages</p>
-                <p>- We do not collect any personal information</p>
-                <p>- Parents can control photo library, camera, and microphone access through device settings</p>
-            </div>
-
-            <div class="section">
-                <h2>Your Rights</h2>
-                <p>You have complete control over photo library access, camera and microphone access (Blogger Mode), local data deletion, app removal, and PicTris Pro subscription management via Apple ID settings.</p>
-            </div>
-
-            <div class="section">
-                <h2>Contact Information</h2>
-                <p>For privacy-related questions:</p>
-                <p>- Email: <a href="mailto:gromozeka@abv.bg">gromozeka@abv.bg</a></p>
-                <p>- Developer: Peresvet</p>
-            </div>
-
-            <div class="section">
-                <h2>Compliance</h2>
-                <p>PicTris complies with App Store Guidelines, GDPR, CCPA, and COPPA.</p>
-            </div>
-
-            <div class="section">
-                <h2>Conclusion</h2>
-                <p>PicTris is designed to provide a private, secure experience where your data stays on your device. We believe in transparent privacy practices and minimal data collection.</p>
-                <p>By using PicTris, you agree to this privacy policy. If you disagree with any part of this policy, please do not use the application.</p>
-            </div>
-        </div>
-    </div>
-
-    <div id="about" class="content-section">
-        <div class="content">
-            <img src="images/Cat with the laptop.jpg" 
-                 alt="Developer Cat"
-                 width="300" 
-                 height="300"
-                 style="display: block; 
-                        margin: 20px auto; 
-                        border-radius: 10px;"
-                 class="developer-cat">
-            
-            <h1>About Developer</h1>
-            
-            <div class="section">
-                <h2>DANIIL ZOLOTAREV</h2>
-                <h3>IOS DEVELOPER</h3>
-                
-                <div class="summary-section">
-                    <h3>SUMMARY</h3>
-                    <p>iOS developer with 5+ years experience in developing and supporting applications for
-                    Apple platforms (iOS, iPadOS, watchOS). Excellent knowledge of Swift, UIKit
-                    framework, Storyboards, SwiftUI, Apple Human Interface Guidelines.</p>
-                    <p>Confident experience with data storage (Realm, Core Data, GRDB).</p>
+    <main>
+        <section class="hero section" id="home">
+            <div class="container hero-grid">
+                <div class="hero-content">
+                    <h1>Tetris meets your gallery</h1>
+                    <p class="hero-tagline">Play block puzzle over your photos and videos — or record face-cam gameplay with Blogger Mode. Offline, no ads, privacy-first.</p>
+                    <div class="hero-badges">
+                        <a href="https://apps.apple.com/bg/app/pictris/id6739788238" class="app-store-link" target="_blank" rel="noopener noreferrer">
+                            <img src="images/US/Download_on_App_Store/Black_lockup/SVG/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg"
+                                 alt="Download on the App Store"
+                                 class="app-store-badge light-badge"
+                                 height="48">
+                            <img src="images/US/Download_on_App_Store/White_lockup/SVG/Download_on_the_App_Store_Badge_US-UK_RGB_wht_092917.svg"
+                                 alt="Download on the App Store"
+                                 class="app-store-badge dark-badge"
+                                 height="48">
+                        </a>
+                    </div>
                 </div>
-
-                <div class="experience-section">
-                    <h4>Application stack:</h4>
-                    <ul class="tech-stack">
-                        <li>MVC (Planning to transition to MVVM)</li>
-                        <li>UIKit</li>
-                        <li>SwiftUI</li>
-                        <li>CoreData</li>
-                        <li>Alamofire</li>
-                        <li>WebSockets</li>
-                        <li>Firebase</li>
-                        <li>AVFoundation</li>
-                        <li>CoreAnimation</li>
-                    </ul>
+                <div class="hero-visual">
+                    <picture>
+                        <source srcset="images/hero/arm_pictris3.webp" type="image/webp">
+                        <img src="images/hero/arm_pictris3.png"
+                             alt="Hands holding a glowing Tetris T-block — PicTris brand illustration"
+                             width="420" height="420"
+                             loading="eager">
+                    </picture>
                 </div>
             </div>
+        </section>
+
+        <section class="video-section" aria-labelledby="video-heading">
+            <div class="container">
+                <h2 class="section-title" id="video-heading">See it in action</h2>
+                <p class="section-subtitle">Watch PicTris turn your camera roll into a game board.</p>
+                <div class="video-wrapper">
+                    <video class="preview-video"
+                           poster="images/screenshots/video-poster.png"
+                           controls
+                           playsinline
+                           muted
+                           loop
+                           preload="metadata"
+                           aria-label="PicTris app preview video">
+                        <source src="video/preview.mp4" type="video/mp4">
+                    </video>
+                    <button type="button" class="video-unmute-btn" aria-label="Unmute video">🔊 Unmute</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="modes" aria-labelledby="modes-heading">
+            <div class="container">
+                <h2 class="section-title" id="modes-heading">Three play modes</h2>
+                <p class="section-subtitle">Choose how you want to rediscover your memories.</p>
+                <div class="modes-grid">
+                    <article class="mode-card">
+                        <picture>
+                            <source srcset="images/screenshots/1.webp" type="image/webp">
+                            <img src="images/screenshots/1.png"
+                                 alt="Photo Gallery mode — Tetris blocks falling over a personal photo"
+                                 width="369" height="800"
+                                 loading="lazy">
+                        </picture>
+                        <div class="mode-card-body">
+                            <h3>Photo Gallery</h3>
+                            <p>Your photos become the game background. Swipe down to hard-drop a block and switch to the next image.</p>
+                        </div>
+                    </article>
+                    <article class="mode-card">
+                        <picture>
+                            <source srcset="images/screenshots/2.webp" type="image/webp">
+                            <img src="images/screenshots/2.png"
+                                 alt="Video Gallery mode — Tetris gameplay over a portrait video from your library"
+                                 width="369" height="800"
+                                 loading="lazy">
+                        </picture>
+                        <div class="mode-card-body">
+                            <h3>Video Gallery</h3>
+                            <p>Portrait videos play behind the board with sound. Long press pauses the game and video together.</p>
+                        </div>
+                    </article>
+                    <article class="mode-card">
+                        <picture>
+                            <source srcset="images/screenshots/3.webp" type="image/webp">
+                            <img src="images/screenshots/3.png"
+                                 alt="Blogger Mode — front camera background with Tetris gameplay for content creators"
+                                 width="369" height="800"
+                                 loading="lazy">
+                        </picture>
+                        <div class="mode-card-body">
+                            <span class="mode-badge">New in 1.5</span>
+                            <h3>Blogger Mode</h3>
+                            <p>Front camera as a live background. Record gameplay with voice commentary and an optional teleprompter.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="features" aria-labelledby="features-heading">
+            <div class="container">
+                <h2 class="section-title" id="features-heading">More than a game</h2>
+                <p class="section-subtitle">Mindful gallery browsing meets classic puzzle gameplay.</p>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon" aria-hidden="true">🧘</div>
+                        <h3>Mindful browsing</h3>
+                        <p>Turn routine photo review into an engaging ritual at your own pace.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon" aria-hidden="true">😂</div>
+                        <h3>Meme editor</h3>
+                        <p>Capture a screenshot, add text overlays, and share with friends.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon" aria-hidden="true">🏆</div>
+                        <h3>Achievements</h3>
+                        <p>Track high scores, photos viewed, and lines cleared.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon" aria-hidden="true">📅</div>
+                        <h3>Gallery filters</h3>
+                        <p>Browse by day, week, month, year, or your entire library.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon" aria-hidden="true">📴</div>
+                        <h3>Offline &amp; ad-free</h3>
+                        <p>No internet required for core gameplay. No ads, ever.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon" aria-hidden="true">📱</div>
+                        <h3>iPhone &amp; iPad</h3>
+                        <p>Universal layout optimized for both iPhone and iPad.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="pro-section" id="pro" aria-labelledby="pro-heading">
+            <div class="container">
+                <div class="pro-grid">
+                    <div class="pro-visual">
+                        <picture>
+                            <source srcset="images/pro/pictris-pro.webp" type="image/webp">
+                            <img src="images/pro/pictris-pro.png"
+                                 alt="PicTris Pro — unlimited Blogger Mode recordings with camera and microphone"
+                                 width="320" height="693"
+                                 loading="lazy">
+                        </picture>
+                    </div>
+                    <div class="pro-content">
+                        <h2 id="pro-heading">PicTris Pro</h2>
+                        <p>Get more from your camera roll. Record, play, teleprompter — for creators.</p>
+                        <ul class="pro-list">
+                            <li>Unlimited Blogger Mode recordings</li>
+                            <li>No watermark on exported videos</li>
+                            <li>Full teleprompter access</li>
+                        </ul>
+                        <p class="pro-note">The core game is free. Pro unlocks advanced Blogger Mode features via monthly or lifetime In-App Purchase.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="privacy-teaser" aria-labelledby="privacy-heading">
+            <div class="container">
+                <h2 class="section-title" id="privacy-heading">Privacy-first by design</h2>
+                <p class="section-subtitle">Your photos, videos, and recordings stay on your device.</p>
+                <div class="privacy-grid">
+                    <div class="privacy-item">
+                        <div class="icon" aria-hidden="true">🔒</div>
+                        <h3>No tracking</h3>
+                        <p>Zero analytics or data collection</p>
+                    </div>
+                    <div class="privacy-item">
+                        <div class="icon" aria-hidden="true">🚫</div>
+                        <h3>No ads</h3>
+                        <p>Clean experience, no interruptions</p>
+                    </div>
+                    <div class="privacy-item">
+                        <div class="icon" aria-hidden="true">👤</div>
+                        <h3>No accounts</h3>
+                        <p>No sign-up, no cloud sync</p>
+                    </div>
+                    <div class="privacy-item">
+                        <div class="icon" aria-hidden="true">📲</div>
+                        <h3>On-device only</h3>
+                        <p>All processing happens locally</p>
+                    </div>
+                </div>
+                <a href="privacy.html" class="privacy-link">Read full Privacy Policy →</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <p class="footer-copy">© 2026 Peresvet · PicTris v1.5</p>
+            <div class="footer-links">
+                <a href="mailto:gromozeka@abv.bg">Support</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="about.html">About the developer</a>
+                <a href="https://apps.apple.com/bg/app/pictris/id6739788238" class="app-store-link" target="_blank" rel="noopener noreferrer">App Store</a>
+            </div>
         </div>
-    </div>
-
-    <script>
-        const canvas = document.getElementById('canvas');
-        const ctx = canvas.getContext('2d');
-        
-        // Устанавливаем размер холста на весь экран
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-
-        // Массив для хранения падающих объектов
-        const objects = [];
-        
-        // Определяем фигуры тетриса
-        const TETROMINOS = {
-            I: [[1, 1, 1, 1]],
-            O: [[1, 1], 
-                [1, 1]],
-            T: [[0, 1, 0],
-                [1, 1, 1]],
-            L: [[1, 0],
-                [1, 0],
-                [1, 1]],
-            J: [[0, 1],
-                [0, 1],
-                [1, 1]],
-            S: [[0, 1, 1],
-                [1, 1, 0]],
-            Z: [[1, 1, 0],
-                [0, 1, 1]]
-        };
-
-        function getRandomColor() {
-            const letters = '0123456789ABCDEF';
-            let color = '#';
-            for (let i = 0; i < 6; i++) {
-                color += letters[Math.floor(Math.random() * 16)];
-            }
-            return color;
-        }
-
-        function createObject() {
-            const shapes = Object.keys(TETROMINOS);
-            const randomShape = shapes[Math.floor(Math.random() * shapes.length)];
-            const tetrominoMatrix = TETROMINOS[randomShape];
-            
-            const object = {
-                x: Math.random() * (canvas.width - 100),
-                y: -50,
-                speed: 1 + Math.random() * 2,
-                shape: tetrominoMatrix,
-                color: getRandomColor()
-            };
-            
-            objects.push(object);
-        }
-
-        function drawObject(obj) {
-            ctx.fillStyle = obj.color;
-            const blockSize = 20;
-            
-            obj.shape.forEach((row, i) => {
-                row.forEach((cell, j) => {
-                    if (cell) {
-                        ctx.fillRect(
-                            obj.x + j * blockSize, 
-                            obj.y + i * blockSize, 
-                            blockSize, 
-                            blockSize
-                        );
-                    }
-                });
-            });
-        }
-
-        function updateObjects() {
-            for (let i = objects.length - 1; i >= 0; i--) {
-                objects[i].y += objects[i].speed;
-                
-                if (objects[i].y > canvas.height) {
-                    objects.splice(i, 1);
-                }
-            }
-        }
-
-        function animate() {
-            // Заменим непрозрачный черный фон на цвет из CSS переменной с прозрачностью
-            const backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--bg-color');
-            ctx.fillStyle = backgroundColor.trim();
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            if (Math.random() < 0.03) {
-                createObject();
-            }
-            
-            updateObjects();
-            objects.forEach(drawObject);
-            
-            requestAnimationFrame(animate);
-        }
-
-        animate();
-
-        // Плавная прокрутка для меню
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        const root = document.documentElement;
-
-        // Функция для установки темы
-        function setTheme(isDark) {
-            root.setAttribute('data-theme', isDark ? 'dark' : 'light');
-        }
-
-        // Слушатель для системных настроек темы
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-            setTheme(e.matches);
-        });
-
-        // Установка начальной темы
-        setTheme(window.matchMedia('(prefers-color-scheme: dark)').matches);
-    </script>
+    </footer>
 </body>
 </html>

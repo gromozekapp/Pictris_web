@@ -24,12 +24,12 @@ Pictris transforms photo and video browsing into an engaging game:
 
 ## Site Features
 
-- Landing page with App Store badge
-- Play modes and PicTris Pro overview
-- Privacy policy (camera, microphone, recordings, IAP)
+- Product landing page with hero, app preview video, and screenshot gallery
+- Three play modes, features grid, PicTris Pro section
+- Separate privacy policy and about developer pages
 - Light / dark theme (system preference)
-- Animated canvas background
-- Responsive layout
+- SEO meta tags, Open Graph, sitemap, robots.txt
+- Responsive layout with mobile navigation
 - GitHub Pages hosting
 
 ---
@@ -38,10 +38,21 @@ Pictris transforms photo and video browsing into an engaging game:
 
 ```
 Pictris_web/
-├── index.html      # Landing page + privacy policy
-├── styles.css      # Layout & theme variables
-├── theme.js        # Dark/light mode toggle
-└── images/         # Screenshots, App Store badges
+├── index.html          # Landing page
+├── privacy.html        # Privacy policy
+├── about.html          # About the developer
+├── css/main.css        # Styles & theme
+├── js/
+│   ├── theme.js        # Dark/light mode
+│   └── main.js         # Navigation, video controls
+├── images/
+│   ├── hero/           # App icon, brand illustration
+│   ├── screenshots/    # App Store promo screenshots
+│   ├── pro/            # PicTris Pro promo
+│   └── US/...          # App Store badges
+├── video/preview.mp4   # App preview video
+├── robots.txt
+└── sitemap.xml
 ```
 
 ---

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gromozekapp.github.io/Pictris_web/sitemap.xml
