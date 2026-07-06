@@ -11,6 +11,11 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://gromozekapp.github.io/Pictris_web/faq.html</loc>
+    <lastmod>2026-07-06</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://gromozekapp.github.io/Pictris_web/about.html</loc>
     <lastmod>2026-07-05</lastmod>
     <priority>0.4</priority>
