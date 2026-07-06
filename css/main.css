@@ -241,14 +241,49 @@ main {
   height: 48px;
 }
 
-/* Video section */
-.video-section {
-  padding: 48px 0 72px;
+/* Video + What's new layout */
+.video-whats-new-section {
+  padding: 72px 0;
+}
+
+.layout-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: none;
+}
+
+.layout-table td {
+  border: none;
+  padding: 0;
+  vertical-align: top;
+}
+
+.layout-col-video {
+  width: 38%;
+  padding-right: 32px;
+}
+
+.layout-col-whats-new {
+  width: 62%;
+  padding-left: 32px;
+}
+
+.layout-col-video .section-title,
+.layout-col-whats-new .section-title {
+  text-align: left;
+}
+
+.layout-col-video .section-subtitle {
+  text-align: left;
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 24px;
+  max-width: none;
 }
 
 .video-wrapper {
   max-width: 300px;
-  margin: 0 auto;
+  margin: 0;
   border-radius: 16px;
   overflow: hidden;
   box-shadow: var(--shadow);
@@ -281,6 +316,13 @@ main {
 
 .video-unmute-btn:hover {
   background: rgba(0, 0, 0, 0.85);
+}
+
+.whats-new-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 20px;
 }
 
 /* Play modes */
@@ -335,6 +377,46 @@ main {
   padding: 2px 8px;
   border-radius: 12px;
   margin-bottom: 8px;
+}
+
+/* What's new cards */
+.whats-new-card {
+  background: var(--surface);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--surface-border);
+  border-radius: 14px;
+  padding: 28px;
+  box-shadow: var(--shadow);
+}
+
+.whats-new-lead {
+  font-size: 0.95rem;
+  color: var(--text-color);
+  margin: 0 0 12px;
+}
+
+.whats-new-card ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.whats-new-card li {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.whats-new-card li:last-child {
+  margin-bottom: 0;
+}
+
+.whats-new-footnote {
+  text-align: left;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  font-style: italic;
+  margin: 0;
 }
 
 /* How to play */
@@ -693,7 +775,8 @@ main {
   margin-bottom: 0;
 }
 
-.faq-answer ol {
+.faq-answer ol,
+.faq-answer ul {
   margin: 0 0 12px;
   padding-left: 1.25rem;
 }
@@ -757,6 +840,28 @@ main {
 
 /* Responsive */
 @media (max-width: 900px) {
+  .layout-table,
+  .layout-table tbody,
+  .layout-table tr,
+  .layout-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .layout-col-video,
+  .layout-col-whats-new {
+    width: 100%;
+    padding: 0;
+  }
+
+  .layout-col-whats-new {
+    margin-top: 48px;
+  }
+
+  .layout-col-video .video-wrapper {
+    margin: 0 auto;
+  }
+
   .controls-grid {
     grid-template-columns: repeat(2, 1fr);
   }

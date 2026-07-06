@@ -4,15 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PicTris — Tetris meets your gallery</title>
-    <meta name="description" content="PicTris — play Tetris over your photos and videos. Blogger Mode records gameplay with front camera. Free, offline, no ads.">
+    <meta name="description" content="PicTris — photo puzzle arcade: play Tetris over your photo and video gallery. Blogger Mode for creators: reaction gameplay, screen record, face-cam. Free, offline, no ads.">
+    <meta name="keywords" content="pictris, tetris, photo, puzzle, arcade, gallery, video, blogger, creator, reaction, screen record, photo roulette">
     <meta property="og:title" content="PicTris — Tetris meets your gallery">
-    <meta property="og:description" content="Play Tetris over your photos and videos. Record face-cam gameplay with Blogger Mode. Free, offline, privacy-first.">
+    <meta property="og:description" content="Photo puzzle arcade: Tetris over your gallery. Blogger Mode for creators — reaction gameplay, screen record, face-cam. Free, offline, no ads.">
     <meta property="og:image" content="https://gromozekapp.github.io/Pictris_web/images/screenshots/1.png">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://gromozekapp.github.io/Pictris_web/">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="PicTris — Tetris meets your gallery">
-    <meta name="twitter:description" content="Play Tetris over your photos and videos. Free, offline, no ads.">
+    <meta name="twitter:description" content="Photo puzzle arcade: Tetris over your gallery. Blogger Mode for creators — reaction, screen record, face-cam. Free, offline.">
     <meta name="twitter:image" content="https://gromozekapp.github.io/Pictris_web/images/screenshots/1.png">
     <link rel="canonical" href="https://gromozekapp.github.io/Pictris_web/">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
@@ -33,6 +34,7 @@
             </button>
             <nav aria-label="Main navigation">
                 <ul class="nav-links">
+                    <li><a href="#whats-new">What's new</a></li>
                     <li><a href="#how-to-play">How to play</a></li>
                     <li><a href="#modes">Modes</a></li>
                     <li><a href="#features">Features</a></li>
@@ -59,8 +61,8 @@
     <main>
         <section class="hero section" id="home">
             <div class="container hero-centered">
-                <h1>Tetris meets your gallery</h1>
-                <p class="hero-tagline">Play block puzzle over your photos and videos — or record face-cam gameplay with Blogger Mode. Offline, no ads, privacy-first.</p>
+                <h1>Tetris meets your photo library</h1>
+                <p class="hero-tagline">You save videos and photos — and never open them again. PicTris turns forgotten clips into a classic block puzzle. Play offline, swipe through your media, or record face-cam gameplay with Blogger Mode.</p>
                 <div class="hero-badges">
                     <a href="https://apps.apple.com/bg/app/pictris/id6739788238" class="app-store-link" target="_blank" rel="noopener noreferrer">
                         <img src="images/US/Download_on_App_Store/Black_lockup/SVG/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg"
@@ -76,23 +78,55 @@
             </div>
         </section>
 
-        <section class="video-section" aria-labelledby="video-heading">
+        <section class="section video-whats-new-section" id="whats-new" aria-labelledby="whats-new-heading">
             <div class="container">
-                <h2 class="section-title" id="video-heading">See it in action</h2>
-                <p class="section-subtitle">Watch PicTris turn your camera roll into a game board.</p>
-                <div class="video-wrapper">
-                    <video class="preview-video"
-                           poster="images/screenshots/video-poster.png"
-                           controls
-                           playsinline
-                           muted
-                           loop
-                           preload="metadata"
-                           aria-label="PicTris app preview video">
-                        <source src="video/preview.mp4" type="video/mp4">
-                    </video>
-                    <button type="button" class="video-unmute-btn" aria-label="Unmute video">🔊 Unmute</button>
-                </div>
+                <table class="layout-table" role="presentation">
+                    <tr>
+                        <td class="layout-col layout-col-video">
+                            <h2 class="section-title" id="video-heading">See it in action</h2>
+                            <p class="section-subtitle">Watch PicTris turn your camera roll into a game board.</p>
+                            <div class="video-wrapper">
+                                <video class="preview-video"
+                                       poster="images/screenshots/video-poster.png"
+                                       controls
+                                       playsinline
+                                       muted
+                                       loop
+                                       preload="metadata"
+                                       aria-label="PicTris app preview video">
+                                    <source src="video/preview.mp4" type="video/mp4">
+                                </video>
+                                <button type="button" class="video-unmute-btn" aria-label="Unmute video">🔊 Unmute</button>
+                            </div>
+                        </td>
+                        <td class="layout-col layout-col-whats-new">
+                            <h2 class="section-title" id="whats-new-heading">What's New in 1.5</h2>
+                            <div class="whats-new-stack">
+                                <article class="whats-new-card">
+                                    <span class="mode-badge">Blogger Mode</span>
+                                    <p class="whats-new-lead">A new way to play and create content:</p>
+                                    <ul>
+                                        <li>Front camera as a live game background — perfect for reactions and face-cam gameplay</li>
+                                        <li>Automatic screen recording with voice commentary and in-game audio</li>
+                                        <li>Built-in teleprompter: load a script from Files, auto scroll or manual swipe</li>
+                                        <li>Hide the grid or score panel for a cleaner recording</li>
+                                        <li>After game over: preview, save to Photos, or share your video</li>
+                                    </ul>
+                                </article>
+                                <article class="whats-new-card">
+                                    <span class="mode-badge">PicTris Pro</span>
+                                    <p class="whats-new-lead">Optional upgrade for creators:</p>
+                                    <ul>
+                                        <li>Unlimited Blogger Mode recordings (free plan: 1 per day)</li>
+                                        <li>No watermark on exported videos</li>
+                                        <li>Full teleprompter access</li>
+                                    </ul>
+                                </article>
+                            </div>
+                            <p class="whats-new-footnote">The classic Photo and Video Gallery modes are unchanged — still free, still offline, still no ads.</p>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </section>
 
@@ -104,7 +138,7 @@
                     <div class="control-card">
                         <span class="control-gesture" aria-hidden="true">← →</span>
                         <h3>Swipe left / right</h3>
-                        <p>Move the falling block across the board.</p>
+                        <p>Move the falling block and browse your gallery.</p>
                     </div>
                     <div class="control-card">
                         <span class="control-gesture" aria-hidden="true">↑</span>
@@ -242,7 +276,7 @@
                             <li>No watermark on exported videos</li>
                             <li>Full teleprompter — auto scroll, manual swipe, scripts from Files</li>
                         </ul>
-                        <p class="pro-note">The core game is free. Pro unlocks advanced Blogger Mode features via monthly or lifetime In-App Purchase.</p>
+                        <p class="pro-note">The core game is free. Blogger Mode includes one free recording per day. Pro unlocks unlimited recordings, no watermark, and full teleprompter — monthly or lifetime In-App Purchase.</p>
                     </div>
                 </div>
             </div>
