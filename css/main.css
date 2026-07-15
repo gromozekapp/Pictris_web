@@ -765,6 +765,17 @@ main {
   padding-top: 0;
 }
 
+.tip-section .video-wrapper {
+  margin: 24px auto;
+}
+
+.tip-video-caption {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin: -8px 0 24px;
+}
+
 .tip-code {
   background: var(--surface-solid);
   border: 1px solid var(--surface-border);
