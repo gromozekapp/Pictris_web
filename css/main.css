@@ -532,6 +532,47 @@ main {
   margin: 0;
 }
 
+/* Use cases */
+.use-cases-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.use-case-card {
+  background: var(--surface);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--surface-border);
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: var(--shadow);
+}
+
+.use-case-icon {
+  font-size: 2rem;
+  margin-bottom: 12px;
+  line-height: 1;
+}
+
+.use-case-card h3 {
+  font-size: 1.15rem;
+  color: var(--heading-color);
+  margin: 0 0 12px;
+}
+
+.use-case-card p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin: 0 0 12px;
+}
+
+.use-case-card .privacy-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 0.95rem;
+}
+
 /* Pro section */
 .pro-section {
   padding: 72px 0;
@@ -712,6 +753,34 @@ main {
   color: var(--text-color);
 }
 
+.tip-section {
+  margin-top: 40px;
+  padding-top: 8px;
+  border-top: 1px solid var(--surface-border);
+}
+
+.tip-section:first-of-type {
+  margin-top: 24px;
+  border-top: none;
+  padding-top: 0;
+}
+
+.tip-code {
+  background: var(--surface-solid);
+  border: 1px solid var(--surface-border);
+  border-radius: 8px;
+  padding: 16px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  margin: 0 0 16px;
+}
+
+.tip-footer-link {
+  margin-top: 32px;
+}
+
 .page-hero-img {
   border-radius: 12px;
   margin: 0 auto 24px;
@@ -874,6 +943,10 @@ main {
 
   .features-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .use-cases-grid {
+    grid-template-columns: 1fr;
   }
 
   .pro-grid {

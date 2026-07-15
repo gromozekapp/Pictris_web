@@ -20,13 +20,20 @@ Pictris transforms photo and video browsing into an engaging game:
 - Meme editor, achievements, gallery filters
 - Privacy-first — no ads, no tracking, no accounts
 
+### Use cases
+
+- **Language tutors & learners** — flashcard images in Photo Gallery; oral exams via Blogger Mode + teleprompter
+- **Async HR screening** — candidate-controlled video answers hosted on your own cloud/social link
+- **Creators** — reaction gameplay, vacation recaps, face-cam recordings
+
 ---
 
 ## Site Features
 
 - Product landing page with hero, app preview video, and screenshot gallery
-- Three play modes, features grid, PicTris Pro section
-- Separate privacy policy and about developer pages
+- Use cases: language learning, HR screening, creator workflows
+- Tips page with step-by-step guides
+- Separate privacy policy, FAQ, and about developer pages
 - Light / dark theme (system preference)
 - SEO meta tags, Open Graph, sitemap, robots.txt
 - Responsive layout with mobile navigation
@@ -39,6 +46,8 @@ Pictris transforms photo and video browsing into an engaging game:
 ```
 Pictris_web/
 ├── index.html          # Landing page
+├── tips.html           # Guides: flashcards, HR screening, vacation recap
+├── faq.html            # FAQ
 ├── privacy.html        # Privacy policy
 ├── about.html          # About the developer
 ├── css/main.css        # Styles & theme
@@ -50,7 +59,7 @@ Pictris_web/
 │   ├── screenshots/    # App Store promo screenshots
 │   ├── pro/            # PicTris Pro promo
 │   └── US/...          # App Store badges
-├── video/preview.mp4   # App preview video
+├── video/preview.mp4   # App preview video (landing page only)
 ├── robots.txt
 └── sitemap.xml
 ```
