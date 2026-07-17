@@ -792,6 +792,30 @@ main {
   margin-top: 32px;
 }
 
+.bot-cta {
+  display: inline-block;
+  margin: 4px 0 16px;
+  padding: 12px 20px;
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: #fff;
+  background: #2aabee;
+  border-radius: 12px;
+  text-decoration: none;
+  box-shadow: var(--shadow);
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.bot-cta:hover {
+  color: #fff;
+  background: #229ed9;
+  transform: translateY(-1px);
+}
+
+.use-case-card .privacy-link + .privacy-link {
+  margin-left: 16px;
+}
+
 .page-hero-img {
   border-radius: 12px;
   margin: 0 auto 24px;

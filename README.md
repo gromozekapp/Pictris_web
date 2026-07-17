@@ -22,7 +22,7 @@ Pictris transforms photo and video browsing into an engaging game:
 
 ### Use cases
 
-- **Language tutors & learners** — flashcard images in Photo Gallery; oral exams via Blogger Mode + teleprompter
+- **Language tutors & learners** — generate cards with Telegram bot [@Pictris_vocab_cards_bot](https://t.me/Pictris_vocab_cards_bot), review in Photo Gallery; oral exams via Blogger Mode + teleprompter
 - **Async HR screening** — candidate-controlled video answers hosted on your own cloud/social link
 - **Creators** — reaction gameplay, vacation recaps, face-cam recordings
 
@@ -79,3 +79,4 @@ python3 -m http.server 8080
 
 - [Pictris](https://github.com/gromozekapp/Pictris) — iOS app (private repo)
 - [App Store](https://apps.apple.com/bg/app/pictris/id6739788238)
+- [@Pictris_vocab_cards_bot](https://t.me/Pictris_vocab_cards_bot) — Telegram bot for vocabulary flashcards
